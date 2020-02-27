@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Works log</h2>
+    {% for action in actions %}
+        <h3>Action #{{ loop.index }}</h3>
+        <div class="p-3 mb-2 bg-secondary text-white">
+            <div class="d-flex justify-content-between">
+                <div class="p-2 bd-highlight">
+                    Title of activity
+                </div>
+                <div class="p-2 bd-highlight">
+                    Team leader
+                </div>
+                <div class="p-2 bd-highlight">
+                    Duration
+                </div>
+                <div class="p-2 bd-highlight">
+                    List of collaborators
+                </div>
+                <div class="p-2 bd-highlight">
+                    Is finished
+                </div>
+            </div>
+        </div>
+        <div class="p-3 mb-2 bg-success text-white">
+            <div class="d-flex justify-content-between">
+                <div class="p-2 bd-highlight">
+                    {{ action.job }}
+                </div>
+                <div class="p-2 bd-highlight">
+                    {% for user in users %}
+                        {% if user.id == action.team_leader %}
+                            {{ user.name }} {{ user.surname }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="p-2 bd-highlight">
+                    {{ action.work_size }}
+                </div>
+                <div class="p-2 bd-highlight">
+                    {{ action.collaborators }}
+                </div>
+                <div class="p-2 bd-highlight">
+                    {% if action.is_finished == False %}
+                        Is not finished
+                    {% else %}
+                        Finished
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}
